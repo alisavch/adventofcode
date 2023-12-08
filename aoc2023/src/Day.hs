@@ -6,10 +6,6 @@ import Data.List.Split (splitOn)
 import Data.Char
 
 solve :: String -> Int
-solve input = foldl (+) 0 (map read (map c (map (nums) (ls))))
+solve = foldl1 (+) . (map (read . firstLast . filter isDigit)) . splitOn "\n"
   where
-    ls = splitOn "\n" input
-    nums :: String -> String
-    nums l = (filter isDigit l)
-    c :: String -> String
-    c l = [head l, last l]
+    firstLast l = [head l, last l]
